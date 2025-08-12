@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EXBIAN – Bot Interno</title>
+  <meta name="description" content="Chatbot interno da EXBIAN para perguntas sobre empresa, produtos (SKU/NCM) e respostas comerciais." />
+  <style>
+    :root { --bg: #0b0f14; --card: #121821; --text: #e8eef6; --muted:#9fb2c8; --brand:#00d084; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    header { padding: 28px 20px; display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg, #0e141b, transparent); }
+    header .wrap { width: min(1000px, 92vw); display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.2px; }
+    .brand .dot { width:14px; height:14px; border-radius:50%; background: var(--brand); box-shadow: 0 0 20px #00d08466; }
+    main { display:grid; place-items:center; padding: 24px; }
+    .card { width:min(1000px, 92vw); background: var(--card); border:1px solid #1b2431; border-radius:20px; padding:22px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    h1 { font-size: 22px; margin:0 0 8px; }
+    p { color: var(--muted); margin:.5rem 0 1rem; }
+    .grid { display:grid; grid-template-columns: 1fr; gap:14px; }
+    .pill { display:inline-flex; gap:8px; align-items:center; border:1px dashed #263140; border-radius:999px; padding:8px 12px; color:var(--muted); font-size:13px; }
+    code { background:#0b1118; border:1px solid #222c3a; padding:3px 7px; border-radius:7px; }
+    footer { text-align:center; color:var(--muted); font-size:12px; padding:18px; opacity:.8; }
+    .btn { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid #263140; background:#0f1620; color:var(--text); text-decoration:none; cursor:pointer; }
+    .btn:hover { border-color:#334055; }
+    .stack { display:flex; flex-wrap:wrap; gap:10px; margin-top:8px; }
+    .tip { font-size:13px; color:#a9bed3; }
+    .hidden { display:none; }
+    .ok { color:#00d084; }
+    .fail { color:#ff6b6b; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="brand"><span class="dot"></span>EXBIAN – Bot Interno</div>
+      <a class="btn" href="#" onclick="window.$tiledesk ? window.$tiledesk.open() : alert('O chat ainda está carregando, tente novamente em alguns segundos.'); return false;" aria-label="Abrir chat">Abrir chat</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h1>Central de Perguntas</h1>
+      <p>Faça perguntas sobre a empresa, cadastros (CNPJ/IE), responsáveis, e produtos (SKU → NCM/EAN/cor). Exemplos:</p>
+      <div class="grid">
+        <div class="pill">“Qual o NCM do SKU <code>MM085</code>?”</div>
+        <div class="pill">“Qual o CNPJ da empresa principal?”</div>
+        <div class="pill">“Quem faz o atendimento da EXBIAN?”</div>
+        <div class="pill">“Crie uma resposta para o Mercado Livre do SKU <code>MM01010</code> sem palavras negativas.”</div>
+      </div>
+      <div class="stack">
+        <span class="tip">Dica: clique em <b>Abrir chat</b> ou use o ícone flutuante.</span>
+      </div>
+    </section>
+
+    <!-- Área de testes visuais (mostra somente com ?test=1) -->
+    <section id="tests" class="card hidden" aria-live="polite">
+      <h2>Testes automáticos</h2>
+      <ul id="tests-list"></ul>
+    </section>
+  </main>
+
+  <footer>© EXBIAN · Chat com Tiledesk embutido</footer>
+
+  <!-- TILEDESK WIDGET: Preencha seu PROJECT_ID abaixo (sem variáveis globais conflitantes) -->
+  <script>
+    (function(){
+      // Evita reinicialização e conflitos se o script for injetado duas vezes
+      if (window.__TD_WIDGET_INIT__) return; 
+      window.__TD_WIDGET_INIT__ = true;
+
+      // Todas as configs ficam isoladas neste escopo (sem poluir o global)
+      const TD_PROJECT_ID = "REPLACE_WITH_TILEDESK_PROJECT_ID"; // ex: 64c1234abcd56789ef012345
+      const TD_DEPARTMENT_ID = null; // ex: "support" ou ID do departamento (opcional)
+      const TD_WIDGET_NAME = "EXBIAN – Assistente";
+
+      // Carrega o widget do Tiledesk
+      function initWidget(){
+        window.tiledeskSettings = {
+          projectid: TD_PROJECT_ID,
+          calloutTimer: 0,
+          fullname: "Colaborador EXBIAN",
+          preChatForm: false,
+          departmentid: TD_DEPARTMENT_ID || undefined,
+          startFromHome: true,
+          themeColor: "#00d084",
+          align: "right",
+          labels: {
+            welcomeTitle: TD_WIDGET_NAME,
+            offlineMessage: "Deixe sua pergunta e responderemos assim que possível."
+          }
+        };
+        if (window.$tiledesk && typeof window.$tiledesk.init === 'function') {
+          window.$tiledesk.init();
+        }
+      }
+
+      // Injeta o script do Tiledesk apenas uma vez
+      (function(d, s, id) {
+        if (d.getElementById(id)) { initWidget(); return; }
+        var js = d.createElement(s); js.id = id; js.async = true;
+        js.src = "https://widget.tiledesk.com/v5/launch.js";
+        d.head.appendChild(js);
+        js.onload = initWidget;
+      }(document, 'script', 'tiledesk-widget-loader'));
+
+      // ==============================
+      // TESTES AUTOMÁTICOS (auto-check)
+      // ==============================
+      const tests = [];
+      function addResult(ok, msg){ tests.push({ ok, msg }); }
+
+      try {
+        addResult(typeof TD_PROJECT_ID === 'string', 'TD_PROJECT_ID é string.');
+        addResult(!!TD_PROJECT_ID && TD_PROJECT_ID !== 'REPLACE_WITH_TILEDESK_PROJECT_ID', 'TD_PROJECT_ID foi substituído pelo ID real.');
+        addResult(!('DEFAULT_DEPARTMENT' in window), 'Não existe variável global DEFAULT_DEPARTMENT (evita conflito).');
+        addResult(!('PROJECT_ID' in window), 'Não existe variável global PROJECT_ID (evita conflito).');
+      } catch (e) {
+        addResult(false, 'Erro ao validar variáveis locais: ' + (e && e.message));
+      }
+
+      // Verifica se o script do Tiledesk carregou em até 5s
+      setTimeout(function(){
+        addResult(!!window.$tiledesk, 'Widget Tiledesk carregado (window.$tiledesk disponível).');
+        // Renderiza os testes se o usuário abrir com ?test=1
+        if (new URLSearchParams(location.search).get('test') === '1') {
+          var testsEl = document.getElementById('tests');
+          var listEl = document.getElementById('tests-list');
+          testsEl.classList.remove('hidden');
+          tests.forEach(function(t){
+            var li = document.createElement('li');
+            li.innerHTML = (t.ok ? '<span class="ok">✔</span> ' : '<span class="fail">✖</span> ') + t.msg;
+            listEl.appendChild(li);
+          });
+        }
+        // Também loga no console para quem preferir
+        if (window.console && console.table) { console.table(tests); }
+      }, 5000);
+
+    })();
+  </script>
+</body>
+</html>
