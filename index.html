@@ -4,128 +4,193 @@
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gregory Marcell - Site Pessoal</title>
-<meta name="description" content="Portfólio e contatos de Gregory Marcell Rodrigues dos Santos." />
+<title>Histórico Profissional - Gregory Marcell</title>
+<meta name="description" content="Histórico profissional de Gregory Marcell Rodrigues dos Santos." />
 <meta name="color-scheme" content="light dark" />
 <style>
-:root{--bg:#f4f4f4;--text:#333;--brand:#333;--link:#007bff;--footer-bg:#222;--footer-tx:#aaa;--footer-br:#444}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{font-family:Arial,Helvetica,sans-serif;margin:0;min-height:100vh;display:flex;flex-direction:column;background-color:var(--bg);color:var(--text);line-height:1.55}
-.skip-link{position:absolute;left:-999px;top:-999px}
-.skip-link:focus-visible{left:12px;top:12px;background:#fff;border:2px solid #000;padding:8px 10px;border-radius:6px;z-index:1000}
-a:focus-visible,button:focus-visible{outline:3px solid #6aa9ff;outline-offset:2px;border-radius:4px}
-header{background-color:var(--brand);color:#fff;padding:12px 0;text-align:center}
-header h1{font-size:1.6rem;margin:0 0 8px}
-nav{display:inline-block}
-nav a{color:#fff;text-decoration:none;margin:0 12px;font-size:.95rem}
-nav a:hover,nav a:focus{text-decoration:underline}
-main.container{width:100%;max-width:900px;margin:0 auto;padding:20px 20px 60px;flex:1}
-section{margin-bottom:40px;content-visibility:auto;contain-intrinsic-size:600px}
-h2{margin-top:0;font-size:1.4rem}
-ul{padding-left:20px}
-a.button{display:inline-block;padding:10px 16px;color:#fff;background-color:var(--link);text-decoration:none;border-radius:6px;margin-top:10px}
+:root{
+  --bg:#f6f7f9; --text:#222; --muted:#6b6b6b;
+  --brand:#151a1f; --link:#4c8dff; --line:#d8dee6;
+  --card:#ffffff; --card-br:#e5e9f0;
+  --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,Helvetica,sans-serif; margin:0;
+  min-height:100vh; display:flex; flex-direction:column;
+  background:var(--bg); color:var(--text); line-height:1.55;
+}
+header{background:var(--brand); color:#fff; text-align:center; padding:14px 0}
+header h1{margin:0;font-size:1.5rem}
+main{width:100%;max-width:980px;margin:0 auto;padding:20px 20px 64px;flex:1}
+footer{position:fixed;left:0;right:0;bottom:0;background:var(--footer-bg);color:var(--footer-tx);text-align:center;font-size:11px;line-height:1.2;padding:6px 0;border-top:1px solid var(--footer-br)}
+a.button{display:inline-block;padding:10px 16px;color:#fff;background:var(--link);text-decoration:none;border-radius:8px;margin:14px 0 24px}
 a.button:hover{filter:brightness(.95)}
-footer{position:fixed;left:0;right:0;bottom:0;background-color:var(--footer-bg);color:var(--footer-tx);text-align:center;font-size:11px;line-height:1.2;padding:4px 0;border-top:1px solid var(--footer-br)}
+
+/* ===== Timeline com GRID corrigido ===== */
+.tl{
+  display: grid;
+  grid-template-columns: 64px 1fr; /* trilho | conteúdo */
+  gap: 16px;
+  position: relative;
+}
+
+/* Trilho ocupa TODAS as linhas do grid */
+.tl-rail{
+  grid-column: 1;
+  grid-row: 1 / -1;        /* <- chave para não “pular” linhas */
+  position: relative;
+  width: 64px;
+}
+
+/* Linha vertical centralizada no trilho */
+.tl-rail::before{
+  content:"";
+  position:absolute;
+  left: 32px;              /* centro do trilho (64/2) */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+/* Cada nó SEMPRE na coluna 2 */
+.tl-node{
+  grid-column: 2;          /* <- chave para não cair na coluna 1 */
+  position: relative;
+  margin-bottom: 24px;
+}
+
+/* Cartão do nó */
+.card{
+  background: var(--card);
+  border: 1px solid var(--card-br);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+/* Ponto alinhado à linha do trilho */
+.tl-node .dot{
+  position: absolute;
+  /* Distância do início da coluna 2 até o centro da linha:
+     (largura do trilho - offset da linha) + gap + raio do ponto
+     (64 - 32) + 16 + 6 = 54  -> usamos negativo para “voltar” até a linha */
+  left: -54px;             /* centra o ponto na linha */
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--link);
+  box-shadow: 0 0 0 2px #fff; /* aro para contraste */
+}
+
+/* Tipografia */
+.card h3{margin:0 0 6px 0}
+.meta{color:var(--muted); font-size:.93rem; margin:6px 0 0}
+.tags{color:var(--muted); font-size:.9rem; margin:8px 0 0}
+.badge{
+  display:inline-block; font-size:.78rem; padding:2px 8px; border-radius:999px; margin-left:6px;
+  color:#1c2a3a; background:#e8f0ff; border:1px solid #d5e3ff;
+}
+.badge.gray{color:#333;background:#eee;border-color:#e0e0e0}
+
+/* Cluster (várias funções no mesmo período) */
+.cluster .period{font-weight:700; margin:0}
+.cluster .subroles{list-style:disc; margin:8px 0 0 18px; padding:0}
+.cluster .subrole{margin:6px 0 0}
+.cluster .title{font-weight:700}
+.cluster .where{margin:2px 0 0 0}
+
+/* Responsivo: recalcula a posição do ponto */
+@media (max-width:560px){
+  .tl{grid-template-columns:56px 1fr}
+  .tl-rail{width:56px}
+  .tl-rail::before{left:28px}
+  /* (56 - 28) + 16 + 6 = 50 -> -50px */
+  .tl-node .dot{left:-50px; top:16px}
+}
+
+/* Dark mode - mantém seu tema */
 @media (prefers-color-scheme: dark){
-  :root{--bg:#111417;--text:#e7e7e7;--brand:#151a1f;--link:#4c8dff;--footer-bg:#0c1014;--footer-tx:#a7a7a7;--footer-br:#1c232b}
-  nav a{color:#eaeaea}.skip-link{background:#111;color:#fff}
+  .card{border-color:#222933}
 }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#conteudo">Ir para o conteúdo principal</a>
-<header id="topo" role="banner">
-  <h1>Gregory Marcell Rodrigues dos Santos</h1>
-  <nav aria-label="Seções do site">
-    <a href="#sobre">Sobre Mim</a>
-    <a href="#curriculo">Currículo</a>
-    <a href="#contato">Contato</a>
-  </nav>
+<header>
+  <h1>Histórico Profissional</h1>
 </header>
 
-<main class="container" id="conteudo">
-  <section id="sobre">
-    <h2>Sobre Mim</h2>
-    <p>Durante minha trajetória, atuei como <strong>Analista de Processo e Operações</strong> e <strong>Gestor de Pessoas</strong>, contribuindo para o <strong>planejamento tributário corporativo</strong>, a <strong>otimização de processos</strong> e o <strong>acompanhamento de colaboradores</strong>. Meu trabalho envolveu a análise de operações e a análise de processos, sempre alinhado aos objetivos organizacionais.</p>
-    <p>Atualmente, estou cursando <strong>Engenharia de Produção</strong> no <strong>Centro Universitário Una</strong>, buscando integrar conhecimentos acadêmicos às habilidades práticas adquiridas.</p>
-    <p>Tenho interesse especial em <strong>processos</strong> e <strong>otimização de processos</strong>, áreas nas quais desenvolvi competências relevantes ao longo da minha trajetória.</p>
-    <p>Ao longo da minha carreira, acumulei experiências ricas e diversificadas:</p>
-    <ul>
-      <li><strong>Analista de Processo:</strong> Mapeamento e padronização de processos (BPM), criação de fluxos e indicadores, automação em planilhas (Excel/Sheets) e melhoria contínua focada em reduzir retrabalho, custos e tempo de ciclo.</li>
-      <li><strong>Analista de Operações:</strong> Planejamento e execução das rotinas operacionais, controle de KPIs e SLA, integração entre áreas (vendas, financeiro, logística) e resolução ágil de gargalos para garantir eficiência e qualidade na entrega.</li>
-      <li><strong>Diretor:</strong> Atuação estratégica na liderança de negócios, definição de metas e indicadores, gestão de equipes multidisciplinares, análise de resultados e tomada de decisões que impactaram diretamente no crescimento sustentável e na consolidação da empresa.</li>
-      <li><strong>Gerente Geral e CFO:</strong> Supervisão de operações e finanças, com foco na otimização de processos, controle de custos e aumento da rentabilidade.</li>
-      <li><strong>Líder de Equipe:</strong> Desenvolvimento de equipes de alto desempenho, promovendo um ambiente de trabalho colaborativo e orientado a resultados.</li>
-      <li><strong>Experiência na Wizard by Pearson:</strong> Contribuí para a expansão e consolidação da marca no mercado educacional, focando em inovação e qualidade.</li>
-    </ul>
-    <p>Minhas principais competências incluem:</p>
-    <ul>
-      <li><strong>Planejamento Estratégico:</strong> Desenvolvimento e implementação de estratégias empresariais alinhadas aos objetivos organizacionais, garantindo crescimento sustentável e vantagem competitiva.</li>
-      <li><strong>Gestão de Projetos:</strong> Condução de projetos complexos desde a concepção até a execução, garantindo a entrega dentro dos prazos e orçamentos estipulados.</li>
-      <li><strong>Análise Financeira:</strong> Monitoramento e controle financeiro rigorosos, identificação de oportunidades de redução de custos e maximização de lucros.</li>
-      <li><strong>Liderança de Equipes:</strong> Criação de ambientes de trabalho motivadores e colaborativos, capacitando equipes para atingir e superar metas.</li>
-      <li><strong>Inovação e Melhoria Contínua:</strong> Busca constante por novas tecnologias e práticas de mercado que possam ser aplicadas para melhorar processos e resultados.</li>
-    </ul>
-  </section>
+<main>
+  <p style="text-align:center">
+    <a href="index.html" class="button">← Voltar ao site principal</a>
+  </p>
 
-  <section id="curriculo">
-    <h2>Currículo</h2>
-    <p><strong>Experiência Profissional:</strong></p>
-   <ul>
-  <li>2020–2025: Analista de Suporte Operacional, EXBIAN E-commerce e Participações LTDA, São Paulo - SP</li>
-  <li>2018–2019: Chief Operations Officer, SHOP60 Comércio de Eletrônicos LTDA, Itabira - MG</li>
-  <li>2017: Assistente Pedagógico, Wizard by Pearson, Itabira - MG</li>
-</ul>
+  <div class="tl">
+    <!-- Coluna esquerda (rail) é apenas estrutural; os pontos aparecem em cada nó -->
+    <div class="tl-rail" aria-hidden="true"></div>
 
-<!-- Botão para histórico completo -->
-<p>
-  <a href="historico.html" class="button" title="Ver histórico profissional completo">
-    Ver histórico profissional completo →
-  </a>
-</p>
-    <p><strong>Formação Acadêmica:</strong></p>
-    <p>Engenharia de Produção (Cursando - 3º período)</p>
-    <p>Inglês Fluente (Wizard by Pearson 2015–2018)</p>
-    <p>Análise e Desenvolvimento de Sistemas (Incompleto)</p>
-    <p>Ensino Médio (Completo)</p>
-    <p><strong>Cursos e Treinamentos:</strong></p>
-    <ul>
-      <li>Master Mind Lince (Master Mind Treinamentos de Alta performance)</li>
-      <li>Master Mind Eneagrama (Master Mind Treinamentos de Alta performance)</li>
-      <li>Gestão de tráfego pago (Pedro Sobral)</li>
-      <li>Academia do E-commerce (Gilmar Theobald)</li>
-      <li>Universidade Marketplaces (Alexandre Nogueira)</li>
-      <li>Regimes tributários para E-commerce (Igor de Savóia)</li>
-    </ul>
-  </section>
+    <!-- ===== Nó 2023–2025: Analista de Operações (terceirizado) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card" aria-labelledby="op-2023">
+        <h3 id="op-2023">Analista de Operações <span class="badge">Terceirizado</span></h3>
+        <div class="where">EXBIAN · São Paulo/SP · Remota</div>
+        <div class="meta">jan de 2023 – ago de 2025 · 2 anos 8 meses</div>
+        <p class="tags"><strong>Competências:</strong> Gestão operacional, Análise de dados, Gestão de pessoas, Planejamento tributário corporativo, Implementações de ERP, DRE, Gestão de equipes, Análise de tendências.</p>
+      </div>
+    </div>
 
-  <section id="contato">
-    <h2>Contato</h2>
-    <p>Entre em contato comigo através dos seguintes meios:</p>
-    <p>Email: <a href="mailto:gregorymrsantos@gmail.com">gregorymrsantos@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://linkedin.com/in/gregorymarcell/" target="_blank" rel="noopener noreferrer">linkedin.com/in/gregorymarcell/</a></p>
-    <p><a class="button" href="#topo" title="Voltar ao início da página">Voltar ao topo</a></p>
-  </section>
+    <!-- ===== CLUSTER 2020–2025 (3 cargos no mesmo período) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card cluster" aria-labelledby="cluster-2020">
+        <h3 id="cluster-2020" class="period">jan de 2020 – ago de 2025 · 5 anos 8 meses</h3>
+        <ul class="subroles">
+          <li class="subrole">
+            <span class="title">Analista Gerente de E-commerce</span>
+            <span class="badge">Terceirizado</span>
+            <div class="where">EXBIAN · São Paulo/SP · Híbrida</div>
+            <div class="tags"><strong>Competências:</strong> DRE, Análises de mercado, Dados estatísticos, Implementações de ERP, Gestão de produtos.</div>
+          </li>
+          <li class="subrole">
+            <span class="title">Analista de Suporte Operacional</span>
+            <span class="badge gray">Autônomo</span>
+            <div class="where">São Paulo/SP · Remota</div>
+            <div class="tags"><strong>Competências:</strong> Indicadores (KPI/SLA), automação em planilhas, integração entre áreas, controle de qualidade de processos.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== 2018–2019: SHOP60 (COO) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card" aria-labelledby="coo-2018">
+        <h3 id="coo-2018">Principal Chief Operations Officer <span class="badge">Terceirizado</span></h3>
+        <div class="where">SHOP60 Comércio de Eletrônicos LTDA · Itabira/MG</div>
+        <div class="meta">ago de 2017 – dez de 2019 · 1 ano 6 meses</div>
+        <p class="tags"><strong>Competências:</strong> Gestão de lucros e perdas, Pesquisa de mercado, Análise de competitividade, Planejamento estratégico, Implementações de ERP, Marketing e produtos.</p>
+      </div>
+    </div>
+
+    <!-- ===== 2017: Wizard (não terceirizado) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card" aria-labelledby="wizard-2017">
+        <h3 id="wizard-2017">Assistente Pedagógico</h3>
+        <div class="where">Wizard by Pearson · Brasil</div>
+        <div class="meta">jan de 2017 – ago de 2017 · 8 meses</div>
+        <p class="tags"><strong>Competências:</strong> Apoio acadêmico, Atendimento ao público, Planejamento de aulas, Acompanhamento de desempenho.</p>
+      </div>
+    </div>
+
+  </div>
 </main>
 
-<footer role="contentinfo" aria-label="Direitos autorais">
+<footer>
   <p>&copy; 2025 Gregory Marcell Rodrigues dos Santos. Todos os direitos reservados.</p>
 </footer>
-
-<script defer>
-(function(){
-  var link=document.querySelector('a[href="#topo"]');
-  if(!link) return;
-  link.addEventListener('click',function(e){
-    var target=document.getElementById('topo');
-    if(!target) return;
-    e.preventDefault();
-    try{target.setAttribute('tabindex','-1');target.focus({preventScroll:true});}catch(_){}
-    window.scrollTo({top:0,behavior:'smooth'});
-    setTimeout(function(){target.removeAttribute('tabindex');},1000);
-  },{passive:true});
-})();
-</script>
 </body>
 </html>
