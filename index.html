@@ -1,236 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gregory Marcell - Site Pessoal</title>
-  <meta name="description" content="Portfólio e contatos de Gregory Marcell Rodrigues dos Santos." />
-  <meta name="color-scheme" content="light dark" />
-  <style>
-    /* ====== Design tokens ====== */
-    :root{
-      --bg: #f4f4f4;
-      --text: #333;
-      --brand: #333;      /* topo */
-      --link: #007bff;    /* botões/links */
-      --footer-bg:#222;   /* rodapé discreto */
-      --footer-tx:#aaa;
-      --footer-br:#444;
-    }
-
-    /* ====== Reset saudável ====== */
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-    }
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    /* ====== Acessibilidade ====== */
-    .skip-link {
-      position: absolute;
-      left: -999px;
-      top: -999px;
-    }
-    .skip-link:focus-visible {
-      left: 12px; top: 12px;
-      background: #fff;
-      border: 2px solid #000;
-      padding: 8px 10px;
-      border-radius: 6px;
-      z-index: 1000;
-    }
-    a:focus-visible, button:focus-visible {
-      outline: 3px solid #6aa9ff;
-      outline-offset: 2px;
-      border-radius: 4px;
-    }
-
-    /* ====== Header / Nav ====== */
-    header {
-      background-color: var(--brand);
-      color: #fff;
-      padding: 12px 0;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 1.6rem;
-      margin: 0 0 8px;
-    }
-    nav { display: inline-block; }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 12px;
-      font-size: 0.95rem;
-    }
-    nav a:hover, nav a:focus { text-decoration: underline; }
-
-    /* ====== Conteúdo ====== */
-    main.container {
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px 20px 60px; /* espaço p/ rodapé fixo */
-      flex: 1;
-    }
-    section { margin-bottom: 40px; }
-    h2 { margin-top: 0; font-size: 1.4rem; }
-    ul { padding-left: 20px; }
-
-    /* ====== Botão ====== */
-    a.button {
-      display: inline-block;
-      padding: 10px 16px;
-      color: #fff;
-      background-color: var(--link);
-      text-decoration: none;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
-    a.button:hover { filter: brightness(0.95); }
-
-    /* ====== Rodapé (tarja discreta) ====== */
-    footer {
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      background-color: var(--footer-bg);
-      color: var(--footer-tx);
-      text-align: center;
-      font-size: 11px;      /* menor */
-      line-height: 1.2;
-      padding: 4px 0;       /* tarja mais fina */
-      border-top: 1px solid var(--footer-br);
-    }
-
-    /* ====== Dark mode automático (opcional) ====== */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #111417;
-        --text: #e7e7e7;
-        --brand: #151a1f;
-        --link: #4c8dff;
-        --footer-bg:#0c1014;
-        --footer-tx:#a7a7a7;
-        --footer-br:#1c232b;
-      }
-      nav a { color: #eaeaea; }
-      .skip-link { background: #111; color: #fff; }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gregory Marcell - Site Pessoal</title>
+<meta name="description" content="Portfólio e contatos de Gregory Marcell Rodrigues dos Santos." />
+<meta name="color-scheme" content="light dark" />
+<style>
+:root{--bg:#f4f4f4;--text:#333;--brand:#333;--link:#007bff;--footer-bg:#222;--footer-tx:#aaa;--footer-br:#444}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{font-family:Arial,Helvetica,sans-serif;margin:0;min-height:100vh;display:flex;flex-direction:column;background-color:var(--bg);color:var(--text);line-height:1.55}
+.skip-link{position:absolute;left:-999px;top:-999px}
+.skip-link:focus-visible{left:12px;top:12px;background:#fff;border:2px solid #000;padding:8px 10px;border-radius:6px;z-index:1000}
+a:focus-visible,button:focus-visible{outline:3px solid #6aa9ff;outline-offset:2px;border-radius:4px}
+header{background-color:var(--brand);color:#fff;padding:12px 0;text-align:center}
+header h1{font-size:1.6rem;margin:0 0 8px}
+nav{display:inline-block}
+nav a{color:#fff;text-decoration:none;margin:0 12px;font-size:.95rem}
+nav a:hover,nav a:focus{text-decoration:underline}
+main.container{width:100%;max-width:900px;margin:0 auto;padding:20px 20px 60px;flex:1}
+section{margin-bottom:40px;content-visibility:auto;contain-intrinsic-size:600px}
+h2{margin-top:0;font-size:1.4rem}
+ul{padding-left:20px}
+a.button{display:inline-block;padding:10px 16px;color:#fff;background-color:var(--link);text-decoration:none;border-radius:6px;margin-top:10px}
+a.button:hover{filter:brightness(.95)}
+footer{position:fixed;left:0;right:0;bottom:0;background-color:var(--footer-bg);color:var(--footer-tx);text-align:center;font-size:11px;line-height:1.2;padding:4px 0;border-top:1px solid var(--footer-br)}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#111417;--text:#e7e7e7;--brand:#151a1f;--link:#4c8dff;--footer-bg:#0c1014;--footer-tx:#a7a7a7;--footer-br:#1c232b}
+  nav a{color:#eaeaea}.skip-link{background:#111;color:#fff}
+}
+</style>
 </head>
 <body>
-  <!-- Link para pular direto ao conteúdo: acessibilidade -->
-  <a class="skip-link" href="#conteudo">Ir para o conteúdo principal</a>
+<a class="skip-link" href="#conteudo">Ir para o conteúdo principal</a>
+<header id="topo" role="banner">
+  <h1>Gregory Marcell Rodrigues dos Santos</h1>
+  <nav aria-label="Seções do site">
+    <a href="#sobre">Sobre Mim</a>
+    <a href="#curriculo">Currículo</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
 
-  <!-- AQUI ESTÁ O ID QUE FALTAVA -->
-  <header id="topo" role="banner">
-    <h1>Gregory Marcell Rodrigues dos Santos</h1>
-    <nav aria-label="Seções do site">
-      <a href="#sobre">Sobre Mim</a>
-      <a href="#curriculo">Currículo</a>
-      <a href="#contato">Contato</a>
-    </nav>
-  </header>
+<main class="container" id="conteudo">
+  <section id="sobre">
+    <h2>Sobre Mim</h2>
+    <p>Durante minha trajetória, atuei como <strong>Analista de Processo e Operações</strong> e <strong>Gestor de Pessoas</strong>, contribuindo para o <strong>planejamento tributário corporativo</strong>, a <strong>otimização de processos</strong> e o <strong>acompanhamento de colaboradores</strong>. Meu trabalho envolveu a análise de operações e a análise de processos, sempre alinhado aos objetivos organizacionais.</p>
+    <p>Atualmente, estou cursando <strong>Engenharia de Produção</strong> no <strong>Centro Universitário Una</strong>, buscando integrar conhecimentos acadêmicos às habilidades práticas adquiridas.</p>
+    <p>Tenho interesse especial em <strong>processos</strong> e <strong>otimização de processos</strong>, áreas nas quais desenvolvi competências relevantes ao longo da minha trajetória.</p>
+    <p>Ao longo da minha carreira, acumulei experiências ricas e diversificadas:</p>
+    <ul>
+      <li><strong>Analista de Processo:</strong> Mapeamento e padronização de processos (BPM), criação de fluxos e indicadores, automação em planilhas (Excel/Sheets) e melhoria contínua focada em reduzir retrabalho, custos e tempo de ciclo.</li>
+      <li><strong>Analista de Operações:</strong> Planejamento e execução das rotinas operacionais, controle de KPIs e SLA, integração entre áreas (vendas, financeiro, logística) e resolução ágil de gargalos para garantir eficiência e qualidade na entrega.</li>
+      <li><strong>Diretor:</strong> Atuação estratégica na liderança de negócios, definição de metas e indicadores, gestão de equipes multidisciplinares, análise de resultados e tomada de decisões que impactaram diretamente no crescimento sustentável e na consolidação da empresa.</li>
+      <li><strong>Gerente Geral e CFO:</strong> Supervisão de operações e finanças, com foco na otimização de processos, controle de custos e aumento da rentabilidade.</li>
+      <li><strong>Líder de Equipe:</strong> Desenvolvimento de equipes de alto desempenho, promovendo um ambiente de trabalho colaborativo e orientado a resultados.</li>
+      <li><strong>Experiência na Wizard by Pearson:</strong> Contribuí para a expansão e consolidação da marca no mercado educacional, focando em inovação e qualidade.</li>
+    </ul>
+    <p>Minhas principais competências incluem:</p>
+    <ul>
+      <li><strong>Planejamento Estratégico:</strong> Desenvolvimento e implementação de estratégias empresariais alinhadas aos objetivos organizacionais, garantindo crescimento sustentável e vantagem competitiva.</li>
+      <li><strong>Gestão de Projetos:</strong> Condução de projetos complexos desde a concepção até a execução, garantindo a entrega dentro dos prazos e orçamentos estipulados.</li>
+      <li><strong>Análise Financeira:</strong> Monitoramento e controle financeiro rigorosos, identificação de oportunidades de redução de custos e maximização de lucros.</li>
+      <li><strong>Liderança de Equipes:</strong> Criação de ambientes de trabalho motivadores e colaborativos, capacitando equipes para atingir e superar metas.</li>
+      <li><strong>Inovação e Melhoria Contínua:</strong> Busca constante por novas tecnologias e práticas de mercado que possam ser aplicadas para melhorar processos e resultados.</li>
+    </ul>
+  </section>
 
-  <main class="container" id="conteudo">
-    <section id="sobre">
-      <h2>Sobre Mim</h2>
-      <p>Durante minha trajetória, atuei como <strong>Analista de Processo e Operações</strong> e <strong>Gestor de Pessoas</strong>, contribuindo para o <strong>planejamento tributário corporativo</strong>, a <strong>otimização de processos</strong> e o <strong>acompanhamento de colaboradores</strong>. Meu trabalho envolveu a análise de operações e a análise de processos, sempre alinhado aos objetivos organizacionais.</p>
+  <section id="curriculo">
+    <h2>Currículo</h2>
+    <p><strong>Experiência Profissional:</strong></p>
+    <ul>
+      <li>2020–2025: Analista de Suporte Operacional, EXBIAN E-commerce e Participações LTDA, São Paulo - SP</li>
+      <li>2018–2019: Chief Operations Officer, SHOP60 Comércio de Eletrônicos LTDA, Itabira - MG</li>
+      <li>2017: Assistente Pedagógico, Wizard by Pearson, Itabira - MG</li>
+    </ul>
+    <p><strong>Formação Acadêmica:</strong></p>
+    <p>Engenharia de Produção (Cursando - 3º período)</p>
+    <p>Inglês Fluente (Wizard by Pearson 2015–2018)</p>
+    <p>Análise e Desenvolvimento de Sistemas (Incompleto)</p>
+    <p>Ensino Médio (Completo)</p>
+    <p><strong>Cursos e Treinamentos:</strong></p>
+    <ul>
+      <li>Master Mind Lince (Master Mind Treinamentos de Alta performance)</li>
+      <li>Master Mind Eneagrama (Master Mind Treinamentos de Alta performance)</li>
+      <li>Gestão de tráfego pago (Pedro Sobral)</li>
+      <li>Academia do E-commerce (Gilmar Theobald)</li>
+      <li>Universidade Marketplaces (Alexandre Nogueira)</li>
+      <li>Regimes tributários para E-commerce (Igor de Savóia)</li>
+    </ul>
+  </section>
 
-      <p>Atualmente, estou cursando <strong>Engenharia de Produção</strong> no <strong>Centro Universitário Una</strong>, buscando integrar conhecimentos acadêmicos às habilidades práticas adquiridas.</p>
+  <section id="contato">
+    <h2>Contato</h2>
+    <p>Entre em contato comigo através dos seguintes meios:</p>
+    <p>Email: <a href="mailto:gregorymrsantos@gmail.com">gregorymrsantos@gmail.com</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/gregorymarcell/" target="_blank" rel="noopener noreferrer">linkedin.com/in/gregorymarcell/</a></p>
+    <p><a class="button" href="#topo" title="Voltar ao início da página">Voltar ao topo</a></p>
+  </section>
+</main>
 
-      <p>Tenho interesse especial em <strong>processos</strong> e <strong>otimização de processos</strong>, áreas nas quais desenvolvi competências relevantes ao longo da minha trajetória.</p>
+<footer role="contentinfo" aria-label="Direitos autorais">
+  <p>&copy; 2025 Gregory Marcell Rodrigues dos Santos. Todos os direitos reservados.</p>
+</footer>
 
-      <p>Ao longo da minha carreira, acumulei experiências ricas e diversificadas:</p>
-      <ul>
-        <li><strong>Analista de Processo:</strong> Mapeamento e padronização de processos (BPM), criação de fluxos e indicadores, automação em planilhas (Excel/Sheets) e melhoria contínua focada em reduzir retrabalho, custos e tempo de ciclo.</li>
-        <li><strong>Analista de Operações:</strong> Planejamento e execução das rotinas operacionais, controle de KPIs e SLA, integração entre áreas (vendas, financeiro, logística) e resolução ágil de gargalos para garantir eficiência e qualidade na entrega.</li>
-        <li><strong>Diretor:</strong> Atuação estratégica na liderança de negócios, definição de metas e indicadores, gestão de equipes multidisciplinares, análise de resultados e tomada de decisões que impactaram diretamente no crescimento sustentável e na consolidação da empresa.</li>
-        <li><strong>Gerente Geral e CFO:</strong> Supervisão de operações e finanças, com foco na otimização de processos, controle de custos e aumento da rentabilidade.</li>
-        <li><strong>Líder de Equipe:</strong> Desenvolvimento de equipes de alto desempenho, promovendo um ambiente de trabalho colaborativo e orientado a resultados.</li>
-        <li><strong>Experiência na Wizard by Pearson:</strong> Contribuí para a expansão e consolidação da marca no mercado educacional, focando em inovação e qualidade.</li>
-      </ul>
-
-      <p>Minhas principais competências incluem:</p>
-      <ul>
-        <li><strong>Planejamento Estratégico:</strong> Desenvolvimento e implementação de estratégias empresariais alinhadas aos objetivos organizacionais, garantindo crescimento sustentável e vantagem competitiva.</li>
-        <li><strong>Gestão de Projetos:</strong> Condução de projetos complexos desde a concepção até a execução, garantindo a entrega dentro dos prazos e orçamentos estipulados.</li>
-        <li><strong>Análise Financeira:</strong> Monitoramento e controle financeiro rigorosos, identificação de oportunidades de redução de custos e maximização de lucros.</li>
-        <li><strong>Liderança de Equipes:</strong> Criação de ambientes de trabalho motivadores e colaborativos, capacitando equipes para atingir e superar metas.</li>
-        <li><strong>Inovação e Melhoria Contínua:</strong> Busca constante por novas tecnologias e práticas de mercado que possam ser aplicadas para melhorar processos e resultados.</li>
-      </ul>
-    </section>
-
-    <section id="curriculo">
-      <h2>Currículo</h2>
-      <p><strong>Experiência Profissional:</strong></p>
-      <ul>
-        <li>2020–2025: Analista de Suporte Operacional, EXBIAN E-commerce e Participações LTDA, São Paulo - SP</li>
-        <li>2018–2019: Chief Operations Officer, SHOP60 Comércio de Eletrônicos LTDA, Itabira - MG</li>
-        <li>2017: Assistente Pedagógico, Wizard by Pearson, Itabira - MG</li>
-      </ul>
-
-      <p><strong>Formação Acadêmica:</strong></p>
-      <p>Engenharia de Produção (Cursando - 3º período)</p>
-      <p>Inglês Fluente (Wizard by Pearson 2015–2018)</p>
-      <p>Análise e Desenvolvimento de Sistemas (Incompleto)</p>
-      <p>Ensino Médio (Completo)</p>
-
-      <p><strong>Cursos e Treinamentos:</strong></p>
-      <ul>
-        <li>Master Mind Lince (Master Mind Treinamentos de Alta performance)</li>
-        <li>Master Mind Eneagrama (Master Mind Treinamentos de Alta performance)</li>
-        <li>Gestão de tráfego pago (Pedro Sobral)</li>
-        <li>Academia do E-commerce (Gilmar Theobald)</li>
-        <li>Universidade Marketplaces (Alexandre Nogueira)</li>
-        <li>Regimes tributários para E-commerce (Igor de Savóia)</li>
-      </ul>
-    </section>
-
-    <section id="contato">
-      <h2>Contato</h2>
-      <p>Entre em contato comigo através dos seguintes meios:</p>
-      <p>Email: <a href="mailto:gregorymrsantos@gmail.com">gregorymrsantos@gmail.com</a></p>
-      <p>LinkedIn: <a href="https://linkedin.com/in/gregorymarcell/" target="_blank" rel="noopener noreferrer">linkedin.com/in/gregorymarcell/</a></p>
-      <p><a class="button" href="#topo" title="Voltar ao início da página">Voltar ao topo</a></p>
-    </section>
-  </main>
-
-  <footer role="contentinfo" aria-label="Direitos autorais">
-    <p>&copy; 2025 Gregory Marcell Rodrigues dos Santos. Todos os direitos reservados.</p>
-  </footer>
-
-  <!-- Fallback JS para rolagem suave e foco acessível -->
-  <script>
-    (function () {
-      var link = document.querySelector('a[href="#topo"]');
-      if (!link) return;
-
-      link.addEventListener('click', function (e) {
-        var target = document.getElementById('topo');
-        if (!target) return; // se por algum motivo não existir, deixa o padrão
-
-        // Impede o salto instantâneo e aplica rolagem suave com foco acessível
-        e.preventDefault();
-        try {
-          target.setAttribute('tabindex', '-1');      // permite receber foco
-          target.focus({ preventScroll: true });      // foco sem scroll
-        } catch (_) {}
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        setTimeout(function () { target.removeAttribute('tabindex'); }, 1000);
-      }, false);
-    })();
-  </script>
+<script defer>
+(function(){
+  var link=document.querySelector('a[href="#topo"]');
+  if(!link) return;
+  link.addEventListener('click',function(e){
+    var target=document.getElementById('topo');
+    if(!target) return;
+    e.preventDefault();
+    try{target.setAttribute('tabindex','-1');target.focus({preventScroll:true});}catch(_){}
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){target.removeAttribute('tabindex');},1000);
+  },{passive:true});
+})();
+</script>
 </body>
 </html>
