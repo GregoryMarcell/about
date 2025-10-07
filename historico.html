@@ -8,31 +8,112 @@
 <meta name="description" content="Histórico profissional de Gregory Marcell Rodrigues dos Santos." />
 <meta name="color-scheme" content="light dark" />
 <style>
-:root{--bg:#f4f4f4;--text:#333;--muted:#6b6b6b;--brand:#333;--link:#007bff;--line:#d4d4d4;--footer-bg:#222;--footer-tx:#aaa;--footer-br:#444}
+:root{
+  --bg:#f6f7f9; --text:#222; --muted:#6b6b6b;
+  --brand:#151a1f; --link:#4c8dff; --line:#d8dee6;
+  --card:#ffffff; --card-br:#e5e9f0;
+  --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:Arial,Helvetica,sans-serif;margin:0;min-height:100vh;display:flex;flex-direction:column;background-color:var(--bg);color:var(--text);line-height:1.55}
-header{background-color:var(--brand);color:#fff;text-align:center;padding:14px 0}
+body{
+  font-family:Arial,Helvetica,sans-serif; margin:0;
+  min-height:100vh; display:flex; flex-direction:column;
+  background:var(--bg); color:var(--text); line-height:1.55;
+}
+header{background:var(--brand); color:#fff; text-align:center; padding:14px 0}
 header h1{margin:0;font-size:1.5rem}
-main{width:100%;max-width:900px;margin:0 auto;padding:20px 20px 60px;flex:1}
-footer{position:fixed;left:0;right:0;bottom:0;background-color:var(--footer-bg);color:var(--footer-tx);text-align:center;font-size:11px;line-height:1.2;padding:4px 0;border-top:1px solid var(--footer-br)}
-a.button{display:inline-block;padding:10px 16px;color:#fff;background-color:var(--link);text-decoration:none;border-radius:6px;margin:15px 0 30px 0}
+main{width:100%;max-width:980px;margin:0 auto;padding:20px 20px 64px;flex:1}
+footer{position:fixed;left:0;right:0;bottom:0;background:var(--footer-bg);color:var(--footer-tx);text-align:center;font-size:11px;line-height:1.2;padding:6px 0;border-top:1px solid var(--footer-br)}
+a.button{display:inline-block;padding:10px 16px;color:#fff;background:var(--link);text-decoration:none;border-radius:8px;margin:14px 0 24px}
 a.button:hover{filter:brightness(.95)}
-/* Timeline */
-.timeline{position:relative;margin-top:8px;padding-left:32px}
-.timeline::before{content:"";position:absolute;left:16px;top:0;bottom:0;width:2px;background:var(--line)}
-.tl-list{list-style:none;margin:0;padding:0}
-.tl-item{position:relative;margin:0 0 18px 0}
-.tl-item::before{content:"";position:absolute;left:10px;top:.35rem;width:12px;height:12px;border-radius:50%;background:var(--link);box-shadow:0 0 0 2px #fff}
-.tl-card{background:transparent;border:1px solid #e8e8e8;border-radius:10px;padding:12px}
-.tl-role{font-weight:700}
-.tl-company{margin:2px 0 0 0}
-.tl-meta{margin:6px 0 0 0;color:var(--muted);font-size:.92rem}
-.tl-tags{margin:8px 0 0 0;color:var(--muted);font-size:.9rem}
-.tl-tags strong{color:inherit}
+
+/* ===== Timeline com GRID corrigido ===== */
+.tl{
+  display: grid;
+  grid-template-columns: 64px 1fr; /* trilho | conteúdo */
+  gap: 16px;
+  position: relative;
+}
+
+/* Trilho ocupa TODAS as linhas do grid */
+.tl-rail{
+  grid-column: 1;
+  grid-row: 1 / -1;        /* <- chave para não “pular” linhas */
+  position: relative;
+  width: 64px;
+}
+
+/* Linha vertical centralizada no trilho */
+.tl-rail::before{
+  content:"";
+  position:absolute;
+  left: 32px;              /* centro do trilho (64/2) */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--line);
+}
+
+/* Cada nó SEMPRE na coluna 2 */
+.tl-node{
+  grid-column: 2;          /* <- chave para não cair na coluna 1 */
+  position: relative;
+  margin-bottom: 24px;
+}
+
+/* Cartão do nó */
+.card{
+  background: var(--card);
+  border: 1px solid var(--card-br);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+/* Ponto alinhado à linha do trilho */
+.tl-node .dot{
+  position: absolute;
+  /* Distância do início da coluna 2 até o centro da linha:
+     (largura do trilho - offset da linha) + gap + raio do ponto
+     (64 - 32) + 16 + 6 = 54  -> usamos negativo para “voltar” até a linha */
+  left: -54px;             /* centra o ponto na linha */
+  top: 18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--link);
+  box-shadow: 0 0 0 2px #fff; /* aro para contraste */
+}
+
+/* Tipografia */
+.card h3{margin:0 0 6px 0}
+.meta{color:var(--muted); font-size:.93rem; margin:6px 0 0}
+.tags{color:var(--muted); font-size:.9rem; margin:8px 0 0}
+.badge{
+  display:inline-block; font-size:.78rem; padding:2px 8px; border-radius:999px; margin-left:6px;
+  color:#1c2a3a; background:#e8f0ff; border:1px solid #d5e3ff;
+}
+.badge.gray{color:#333;background:#eee;border-color:#e0e0e0}
+
+/* Cluster (várias funções no mesmo período) */
+.cluster .period{font-weight:700; margin:0}
+.cluster .subroles{list-style:disc; margin:8px 0 0 18px; padding:0}
+.cluster .subrole{margin:6px 0 0}
+.cluster .title{font-weight:700}
+.cluster .where{margin:2px 0 0 0}
+
+/* Responsivo: recalcula a posição do ponto */
+@media (max-width:560px){
+  .tl{grid-template-columns:56px 1fr}
+  .tl-rail{width:56px}
+  .tl-rail::before{left:28px}
+  /* (56 - 28) + 16 + 6 = 50 -> -50px */
+  .tl-node .dot{left:-50px; top:16px}
+}
+
+/* Dark mode - mantém seu tema */
 @media (prefers-color-scheme: dark){
-  :root{--bg:#111417;--text:#e7e7e7;--muted:#a6a6a6;--brand:#151a1f;--link:#4c8dff;--line:#2b3540;--footer-bg:#0c1014;--footer-tx:#a7a7a7;--footer-br:#1c232b}
-  .tl-card{border-color:#222933}
+  .card{border-color:#222933}
 }
 </style>
 </head>
@@ -42,68 +123,69 @@ a.button:hover{filter:brightness(.95)}
 </header>
 
 <main>
-  <p style="text-align:center;">
+  <p style="text-align:center">
     <a href="index.html" class="button">← Voltar ao site principal</a>
   </p>
 
-  <div class="timeline">
-    <ul class="tl-list">
+  <div class="tl">
+    <!-- Coluna esquerda (rail) é apenas estrutural; os pontos aparecem em cada nó -->
+    <div class="tl-rail" aria-hidden="true"></div>
 
-      <li class="tl-item">
-        <div class="tl-card">
-          <div class="tl-role">Analista de Operações · Terceirizado</div>
-          <p class="tl-company">EXBIAN · São Paulo/SP · Remota</p>
-          <p class="tl-meta">jan de 2023 – ago de 2025 · 2 anos 8 meses</p>
-          <p class="tl-tags"><strong>Competências:</strong> Gestão operacional, Análise de dados, Gestão de pessoas, Planejamento tributário corporativo, Implementações de ERP, DRE, Gestão de equipes, Análise de tendências.</p>
-        </div>
-      </li>
+    <!-- ===== Nó 2023–2025: Analista de Operações (terceirizado) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card" aria-labelledby="op-2023">
+        <h3 id="op-2023">Analista de Operações <span class="badge">Terceirizado</span></h3>
+        <div class="where">EXBIAN · São Paulo/SP · Remota</div>
+        <div class="meta">jan de 2023 – ago de 2025 · 2 anos 8 meses</div>
+        <p class="tags"><strong>Competências:</strong> Gestão operacional, Análise de dados, Gestão de pessoas, Planejamento tributário corporativo, Implementações de ERP, DRE, Gestão de equipes, Análise de tendências.</p>
+      </div>
+    </div>
 
-      <li class="tl-item">
-        <div class="tl-card">
-          <div class="tl-role">Analista Gerente de E-commerce · Terceirizado</div>
-          <p class="tl-company">EXBIAN · São Paulo/SP · Híbrida</p>
-          <p class="tl-meta">jan de 2020 – ago de 2025 · 5 anos 8 meses</p>
-          <p class="tl-tags"><strong>Competências:</strong> Análise de demonstrações financeiras, DRE, Gestão de pessoas, Dados estatísticos, Pesquisa de mercado, Implementações de ERP, Gestão de produtos, Tendências de mercado.</p>
-        </div>
-      </li>
+    <!-- ===== CLUSTER 2020–2025 (3 cargos no mesmo período) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card cluster" aria-labelledby="cluster-2020">
+        <h3 id="cluster-2020" class="period">jan de 2020 – ago de 2025 · 5 anos 8 meses</h3>
+        <ul class="subroles">
+          <li class="subrole">
+            <span class="title">Analista Gerente de E-commerce</span>
+            <span class="badge">Terceirizado</span>
+            <div class="where">EXBIAN · São Paulo/SP · Híbrida</div>
+            <div class="tags"><strong>Competências:</strong> DRE, Análises de mercado, Dados estatísticos, Implementações de ERP, Gestão de produtos.</div>
+          </li>
+          <li class="subrole">
+            <span class="title">Analista de Suporte Operacional</span>
+            <span class="badge gray">Autônomo</span>
+            <div class="where">São Paulo/SP · Remota</div>
+            <div class="tags"><strong>Competências:</strong> Indicadores (KPI/SLA), automação em planilhas, integração entre áreas, controle de qualidade de processos.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
 
-      <li class="tl-item">
-        <div class="tl-card">
-          <div class="tl-role">Analista de Suporte Operacional · Autônomo</div>
-          <p class="tl-company">São Paulo/SP · Remota</p>
-          <p class="tl-meta">jan de 2020 – ago de 2025 · 5 anos 8 meses</p>
-          <p class="tl-tags"><strong>Competências:</strong> Indicadores de desempenho, KPIs, SLA, automação em planilhas, integração entre áreas operacionais, controle de qualidade de processos.</p>
-        </div>
-      </li>
+    <!-- ===== 2018–2019: SHOP60 (COO) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card" aria-labelledby="coo-2018">
+        <h3 id="coo-2018">Principal Chief Operations Officer <span class="badge">Terceirizado</span></h3>
+        <div class="where">SHOP60 Comércio de Eletrônicos LTDA · Itabira/MG</div>
+        <div class="meta">ago de 2017 – dez de 2019 · 1 ano 6 meses</div>
+        <p class="tags"><strong>Competências:</strong> Gestão de lucros e perdas, Pesquisa de mercado, Análise de competitividade, Planejamento estratégico, Implementações de ERP, Marketing e produtos.</p>
+      </div>
+    </div>
 
-      <li class="tl-item">
-        <div class="tl-card">
-          <div class="tl-role">Principal Chief Operations Officer · Terceirizado</div>
-          <p class="tl-company">SHOP60 Comércio de Eletrônicos LTDA · Itabira/MG</p>
-          <p class="tl-meta">jul de 2018 – dez de 2019 · 1 ano 6 meses</p>
-          <p class="tl-tags"><strong>Competências:</strong> Gestão de lucros e perdas, Pesquisa de mercado, Análise de competitividade, Planejamento estratégico, Implementações de ERP, Gestão de produtos e marketing.</p>
-        </div>
-      </li>
+    <!-- ===== 2017: Wizard (não terceirizado) ===== -->
+    <div class="tl-node">
+      <span class="dot" aria-hidden="true"></span>
+      <div class="card" aria-labelledby="wizard-2017">
+        <h3 id="wizard-2017">Assistente Pedagógico</h3>
+        <div class="where">Wizard by Pearson · Brasil</div>
+        <div class="meta">jan de 2017 – ago de 2017 · 8 meses</div>
+        <p class="tags"><strong>Competências:</strong> Apoio acadêmico, Atendimento ao público, Planejamento de aulas, Acompanhamento de desempenho.</p>
+      </div>
+    </div>
 
-      <li class="tl-item">
-        <div class="tl-card">
-          <div class="tl-role">Assistente de Operações Táticas</div>
-          <p class="tl-company">SHOP60 Comércio de Eletrônicos LTDA · Itabira/MG</p>
-          <p class="tl-meta">ago de 2017 – ago de 2018 · 1 ano 1 mês</p>
-          <p class="tl-tags"><strong>Competências:</strong> Pesquisa de mercado, Gestão de produtos, Análise comportamental (Eneagrama), Coordenação de rotina operacional.</p>
-        </div>
-      </li>
-
-      <li class="tl-item">
-        <div class="tl-card">
-          <div class="tl-role">Assistente Pedagógico · Tempo integral</div>
-          <p class="tl-company">Wizard by Pearson · Brasil</p>
-          <p class="tl-meta">jan de 2017 – ago de 2017 · 8 meses</p>
-          <p class="tl-tags"><strong>Competências:</strong> Apoio acadêmico, Atendimento ao público, Planejamento de aulas, Controle de desempenho de alunos.</p>
-        </div>
-      </li>
-
-    </ul>
   </div>
 </main>
 
