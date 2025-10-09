@@ -22,6 +22,7 @@
   --brand:#151a1f; --link:#4c8dff; --line:#d8dee6;
   --card:#ffffff; --card-br:#e5e9f0;
   --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
+  --footer-h: 44px; /* altura do footer */
 }
 @media (prefers-color-scheme: dark){
   :root{
@@ -45,12 +46,17 @@ a:focus-visible,button:focus-visible{outline:3px solid #6aa9ff;outline-offset:2p
 
 header{background:var(--brand); color:#fff; text-align:center; padding:12px 0}
 header h1{margin:0; font-size:1.6rem}
-main{width:100%; max-width:980px; margin:0 auto; padding:20px 20px 72px; flex:1}
+main{
+  width:100%; max-width:980px; margin:0 auto;
+  padding:20px 20px calc(72px + var(--footer-h)); /* reserva espaço p/ o footer */
+  flex:1;
 footer{
   position:fixed; left:0; right:0; bottom:0;
   background:var(--footer-bg); color:var(--footer-tx);
   text-align:center; font-size:11px; line-height:1.2;
-  padding:6px 0; border-top:1px solid var(--footer-br)
+  padding:6px 0; border-top:1px solid var(--footer-br);
+  height: var(--footer-h);                 /* altura consistente */
+  display:flex; align-items:center; justify-content:center; /* centraliza o texto */
 }
 a.button{
   display:inline-block; padding:10px 16px; color:#fff; background:var(--link);
