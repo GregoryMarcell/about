@@ -18,12 +18,21 @@
 <meta name="color-scheme" content="light" />
 <style>
 :root{
-    --bg:#ffffff; /* <-- ALTERADO PARA BRANCO */
-    --text:#222; --muted:#6b6b6b;
-    --brand:#151a1f; --link:#4c8dff; --line:#d8dee6;
-    --card:#ffffff; --card-br:#e5e9f0;
-    --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
-    --header-offset:92px
+  --bg:#ffffff;       /* fundo branco sempre */
+  --text:#222; 
+  --muted:#6b6b6b;
+  --brand:#151a1f; 
+  --link:#4c8dff; 
+  --line:#d8dee6;
+  --card:#ffffff; 
+  --card-br:#e5e9f0;
+  --footer-bg:#0c1014; 
+  --footer-tx:#a7a7a7; 
+  --footer-br:#1c232b;
+  --header-offset:92px;
+
+  /* força esquema claro em browsers móveis */
+  color-scheme: light;
 }
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 @media (max-width: 600px){
@@ -59,10 +68,6 @@ ul{padding-left:20px}
 a.button{display:inline-block;padding:10px 16px;color:#fff;background-color:var(--link);text-decoration:none;border-radius:6px;margin-top:10px}
 a.button:hover{filter:brightness(.95)}
 footer{position:fixed;left:0;right:0;bottom:0;background-color:var(--footer-bg);color:var(--footer-tx);text-align:center;font-size:11px;line-height:1.2;padding:4px 0;border-top:1px solid var(--footer-br)}
-@media (prefers-color-scheme: light){
-  :root{--bg:#111417;--text:#e7e7e7;--brand:#151a1f;--link:#4c8dff;--footer-bg:#0c1014;--footer-tx:#a7a7a7;--footer-br:#1c232b}
-  nav a{color:#eaeaea}.skip-link{background:#111;color:#fff}
-}
 </style>
 </head>
 <body>
