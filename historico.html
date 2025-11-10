@@ -18,21 +18,15 @@
   </script>
 
   <style>
-  :root{
-    --bg:#f6f7f9; --text:#222; --muted:#6b6b6b;
-    --brand:#151a1f; --link:#4c8dff; --line:#d8dee6;
-    --card:#ffffff; --card-br:#e5e9f0;
-    --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
-    --footer-h: 44px; /* altura do rodapé fixo */
-  }
-  @media (prefers-color-scheme: light){
-    :root{
-      --bg:#101418; --text:#e7e7e7; --muted:#a6a6a6;
-      --brand:#151a1f; --link:#4c8dff; --line:#2b3540;
-      --card:#0f1419; --card-br:#222933;
-      --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
-    }
-  }
+ :root{
+  --bg:#ffffff;           /* fundo branco */
+  --text:#222; --muted:#6b6b6b;
+  --brand:#151a1f; --link:#4c8dff; --line:#d8dee6;
+  --card:#ffffff; --card-br:#e5e9f0;
+  --footer-bg:#0c1014; --footer-tx:#a7a7a7; --footer-br:#1c232b;
+  --footer-h: 44px;
+  color-scheme: light;    /* força esquema claro nos browsers móveis */
+}
   *{box-sizing:border-box}
   html{scroll-behavior:smooth}
   @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
